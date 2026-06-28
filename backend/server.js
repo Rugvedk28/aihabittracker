@@ -2,7 +2,8 @@ import "dotenv/config";
 import express from "express";
 import cors from "cors";
 import connectDB from "./config/db.js";
-import { notFound, errorHandler } from "./middleware/errorhandler.js";
+import authRoutes from "./routes/auth.js";
+import { notFound, errorHandler } from "./middleware/errorHandler.js";
 
 
 
@@ -15,17 +16,15 @@ const allowedOrigins = (process.env.CLIENT_URL || "")
 const corsOptions = {
   origin: function (origin, callback) {
     if (!origin || allowedOrigins.includes(origin)) {
-      callback(null, true);
+      return callback(null, true);
     }
     if(/^http:\/\/localhost:\d+$/.test(origin)) {
-      callback(null, true);
+      return callback(null, true);
     }
     if(allowedOrigins.includes(origin)) {
-      callback(null, true);
+      return callback(null, true);
     }
-    else {
-      callback(new Error("Not allowed by CORS"));
-    }
+    return callback(new Error("Not allowed by CORS"));
   },
   credentials: true,
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
@@ -46,6 +45,8 @@ app.get("/api/health", (req, res) => {
   res.send({status: 'ok',
     time: new Date().toISOString()})    
 });
+
+app.use("/api/auth", authRoutes);
 
 app.use(notFound);
 app.use(errorHandler);
