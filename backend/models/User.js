@@ -1,5 +1,10 @@
 import mongoose from "mongoose";
 import bcrypt from "bcryptjs";
+import {
+  getMockStore,
+  isMockDb,
+  matchesQuery,
+} from "../utils/mockDb.js";
 
 const userSchema = mongoose.Schema(
   {
@@ -56,5 +61,60 @@ userSchema.methods.toJSON = function () {
 }
 
 const User = mongoose.model("User", userSchema);
+
+const originalCreate = User.create.bind(User);
+const originalFindOne = User.findOne.bind(User);
+const originalFindById = User.findById.bind(User);
+const originalSave = User.prototype.save;
+
+User.create = async function (data) {
+  if (!isMockDb()) {
+    return originalCreate(data);
+  }
+
+  const user = new User(data);
+  await user.save();
+  return user;
+};
+
+User.findOne = async function (query) {
+  if (!isMockDb()) {
+    return originalFindOne(query);
+  }
+
+  const found = getMockStore().users.find((doc) => matchesQuery(doc, query));
+  return found ? User.hydrate(found) : null;
+};
+
+User.findById = async function (id) {
+  if (!isMockDb()) {
+    return originalFindById(id);
+  }
+
+  const found = getMockStore().users.find((doc) => String(doc._id) === String(id));
+  return found ? User.hydrate(found) : null;
+};
+
+User.prototype.save = async function () {
+  if (!isMockDb()) {
+    return originalSave.call(this);
+  }
+
+  if (this.isModified("password") && this.password) {
+    const salt = await bcrypt.genSalt(10);
+    this.password = await bcrypt.hash(this.password, salt);
+  }
+
+  const plain = this.toObject({ depopulate: true });
+  const users = getMockStore().users;
+  const index = users.findIndex((doc) => String(doc._id) === String(plain._id));
+  if (index >= 0) {
+    users[index] = plain;
+  } else {
+    users.push(plain);
+  }
+
+  return this;
+};
 
 export default User;
