@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import Landing from "./pages/Landing.jsx";
 import Login from "./pages/Login.jsx";
@@ -9,8 +10,15 @@ import Insights from "./pages/Insights.jsx";
 import Stats from "./pages/Stats.jsx";
 import AppLayout from "./components/AppLayout.jsx";
 import ProtectedRoute from "./components/ProtectedRoute.jsx";
+import LoadingScreen from "./components/LoadingScreen.jsx";
 
 export default function App() {
+  const [backendReady, setBackendReady] = useState(false);
+
+  if (!backendReady) {
+    return <LoadingScreen onReady={() => setBackendReady(true)} />;
+  }
+
   return (
     <Routes>
       <Route path="/" element={<Landing />} />
