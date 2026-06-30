@@ -45,14 +45,14 @@ export default function Landing() {
 
   return (
     <div className="min-h-screen">
-      <header className="max-w-6xl mx-auto px-6 py-5 flex items-center justify-between">
-        <div className="flex items-center gap-2">
+      <header className="max-w-6xl mx-auto px-4 sm:px-6 py-4 sm:py-5 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+        <div className="flex items-center gap-2 justify-center sm:justify-start">
           <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-brand-500 to-brand-700 text-white flex items-center justify-center shadow-lg shadow-brand-500/30">
             <Sparkles size={18} />
           </div>
-          <span className="font-semibold text-lg">AI Habit Tracker</span>
+          <span className="font-semibold text-lg">ProHabit</span>
         </div>
-        <nav className="flex items-center gap-2">
+        <nav className="flex items-center justify-center sm:justify-end gap-2 flex-wrap">
           <button
             onClick={toggle}
             className="btn-ghost p-2.5"
@@ -69,16 +69,16 @@ export default function Landing() {
         </nav>
       </header>
 
-      <section className="max-w-6xl mx-auto px-6 pt-10 md:pt-16 pb-16">
-        <div className="grid lg:grid-cols-12 gap-10 lg:gap-6 items-center">
+      <section className="max-w-6xl mx-auto px-4 sm:px-6 pt-8 sm:pt-10 md:pt-16 pb-14 sm:pb-16">
+        <div className="grid lg:grid-cols-12 gap-8 lg:gap-6 items-center">
           <div className="lg:col-span-8 text-center lg:text-left order-2 lg:order-1">
             <div className="inline-flex items-center gap-1.5 chip mb-5 bg-brand-500/15 text-brand-700 dark:text-brand-300">
               <Sparkles size={12} />
               AI-powered habit coach
             </div>
-            <h1 className="text-4xl md:text-6xl font-semibold tracking-tight leading-[1.08]">
+            <h1 className="text-3xl sm:text-4xl md:text-6xl font-semibold tracking-tight leading-[1.08]">
               Build habits that stick,
-              <br />
+              <br className="hidden sm:block" />
               with an AI that actually{" "}
               <span className="bg-gradient-to-br from-brand-400 to-brand-700 bg-clip-text text-transparent">
                 knows you
@@ -89,24 +89,24 @@ export default function Landing() {
               Track your habits, watch your streaks grow, and let AI turn your
               data into real encouragement — not generic motivation.
             </p>
-            <div className="mt-8 flex items-center justify-center lg:justify-start gap-3">
-              <Link to="/register" className="btn-primary px-5 py-3 text-base">
+            <div className="mt-8 flex flex-col sm:flex-row items-stretch sm:items-center justify-center lg:justify-start gap-3">
+              <Link to="/register" className="btn-primary px-5 py-3 text-base w-full sm:w-auto">
                 Start free
                 <ArrowRight size={16} />
               </Link>
-              <Link to="/login" className="btn-secondary px-5 py-3 text-base">
+              <Link to="/login" className="btn-secondary px-5 py-3 text-base w-full sm:w-auto">
                 I have an account
               </Link>
             </div>
           </div>
 
-          <div className="lg:col-span-4 order-1 lg:order-2 flex justify-center lg:-mr-36">
+          <div className="lg:col-span-4 order-1 lg:order-2 flex justify-center lg:-mr-36 scale-[0.92] sm:scale-100">
             <OrbitingHabits />
           </div>
         </div>
 
         <div className="mt-14 md:mt-20 grid md:grid-cols-2 gap-6">
-          <div className="card p-6 relative overflow-hidden">
+          <div className="card p-5 sm:p-6 relative overflow-hidden">
             <div className="text-xs font-semibold uppercase tracking-wider text-brand-600 dark:text-brand-300 mb-2">
               Today
             </div>
@@ -142,7 +142,7 @@ export default function Landing() {
             </div>
           </div>
 
-          <div className="card p-6 relative overflow-hidden">
+          <div className="card p-5 sm:p-6 relative overflow-hidden">
             <div
               className="absolute inset-0 pointer-events-none opacity-60"
               style={{
@@ -161,7 +161,7 @@ export default function Landing() {
                 you're strongest Mon–Wed. Try prepping shoes by the door tonight
                 to protect tomorrow's momentum. Proud of you.
               </p>
-              <div className="mt-6 grid grid-cols-3 gap-3">
+              <div className="mt-6 grid grid-cols-1 sm:grid-cols-3 gap-3">
                 {[
                   { label: "Streaks", value: "4" },
                   { label: "This week", value: "86%" },
@@ -178,7 +178,7 @@ export default function Landing() {
         </div>
       </section>
 
-      <section className="max-w-6xl mx-auto px-6 py-16 border-t divider">
+      <section className="max-w-6xl mx-auto px-4 sm:px-6 py-14 sm:py-16 border-t divider">
         <div className="text-center max-w-2xl mx-auto mb-10">
           <h2 className="text-3xl md:text-4xl font-semibold tracking-tight">
             Everything you need, nothing you don't
@@ -188,7 +188,7 @@ export default function Landing() {
             actual data.
           </p>
         </div>
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {features.map((f) => (
             <div key={f.title} className="card p-5">
               <div className="w-10 h-10 rounded-xl bg-brand-500/15 text-brand-600 dark:text-brand-300 flex items-center justify-center mb-3">
@@ -203,8 +203,8 @@ export default function Landing() {
         </div>
       </section>
 
-      <section className="max-w-6xl mx-auto px-6 py-16">
-        <div className="relative p-10 text-center rounded-2xl overflow-hidden bg-gradient-to-br from-brand-600 to-brand-900 text-white shadow-2xl shadow-brand-500/30">
+      <section className="max-w-6xl mx-auto px-4 sm:px-6 py-14 sm:py-16">
+        <div className="relative p-6 sm:p-10 text-center rounded-2xl overflow-hidden bg-gradient-to-br from-brand-600 to-brand-900 text-white shadow-2xl shadow-brand-500/30">
           <div
             className="absolute inset-0 pointer-events-none opacity-50"
             style={{
@@ -236,8 +236,8 @@ export default function Landing() {
         </div>
       </section>
 
-      <footer className="max-w-6xl mx-auto px-6 py-8 text-center text-xs text-faint border-t divider">
-        Built with MERN · AI Habit Tracker © {new Date().getFullYear()}
+      <footer className="max-w-6xl mx-auto px-4 sm:px-6 py-8 text-center text-xs text-faint border-t divider">
+        Built with MERN · ProHabit © {new Date().getFullYear()}
       </footer>
     </div>
   );

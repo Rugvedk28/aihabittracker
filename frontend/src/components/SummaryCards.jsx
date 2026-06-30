@@ -17,7 +17,7 @@ const Card = ({ icon: Icon, label, value, iconBg, iconFg }) => (
 
 export default function SummaryCards({ totalHabits, activeStreaks, bestStreak, weekRate }) {
   return (
-    <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+    <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-3">
       <Card
         icon={ListChecks}
         label="Total habits"

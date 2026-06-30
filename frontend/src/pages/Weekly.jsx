@@ -71,7 +71,7 @@ export default function Weekly() {
             See every habit across all 7 days at a glance.
           </p>
         </div>
-        <div className="flex items-center gap-2">
+        <div className="flex flex-wrap items-center gap-2">
           <button
             className="btn-secondary px-3"
             onClick={() => setCursor((d) => addWeeks(d, -1))}
@@ -79,7 +79,7 @@ export default function Weekly() {
           >
             <ChevronLeft size={16} />
           </button>
-          <div className="inline-flex items-center gap-2 px-3.5 py-2.5 rounded-xl glass text-sm font-medium">
+          <div className="inline-flex items-center gap-2 px-3.5 py-2.5 rounded-xl glass text-sm font-medium max-w-full">
             <CalendarDays size={14} className="text-muted" />
             {format(days[0].date, "MMM d")} — {format(days[6].date, "MMM d, yyyy")}
           </div>

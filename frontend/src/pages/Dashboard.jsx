@@ -29,6 +29,7 @@ export default function Dashboard() {
   const [formOpen, setFormOpen] = useState(false);
   const [editing, setEditing] = useState(null);
   const [submitting, setSubmitting] = useState(false);
+  const [formError, setFormError] = useState("");
 
   const [suggestOpen, setSuggestOpen] = useState(false);
   const [deleteTarget, setDeleteTarget] = useState(null);
@@ -172,6 +173,7 @@ export default function Dashboard() {
 
   const saveHabit = async (data) => {
     setSubmitting(true);
+    setFormError("");
     try {
       if (editing) {
         const res = await api.put(`/habits/${editing._id}`, data);
@@ -183,6 +185,8 @@ export default function Dashboard() {
       }
       setFormOpen(false);
       setEditing(null);
+    } catch (error) {
+      setFormError(error.response?.data?.message || "Failed to save habit.");
     } finally {
       setSubmitting(false);
     }
@@ -226,7 +230,7 @@ export default function Dashboard() {
 
   return (
     <div className="space-y-6 animate-fade-in">
-      <div className="flex items-center justify-between gap-3">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
         <div>
           <h1 className="text-2xl md:text-3xl font-semibold tracking-tight">
             Hey {user?.name?.split(" ")[0]} 👋
@@ -239,7 +243,7 @@ export default function Dashboard() {
             })}
           </p>
         </div>
-        <div className="flex items-center gap-2">
+        <div className="flex flex-wrap items-center gap-2">
           <button
             className="btn-secondary"
             onClick={() => setSuggestOpen(true)}
@@ -255,7 +259,7 @@ export default function Dashboard() {
             }}
           >
             <Plus size={14} />
-            New habit
+            <span className="hidden sm:inline">New habit</span>
           </button>
         </div>
       </div>
@@ -342,11 +346,11 @@ export default function Dashboard() {
 
       <AIWeeklyReport />
 
-      <div className="grid lg:grid-cols-12 gap-5">
-        <div className="col-span-8">
+      <div className="grid gap-5 lg:grid-cols-12">
+        <div className="lg:col-span-8">
           <WeeklyGrid habits={habits} logsByHabit={weekLogsByHabit} />
         </div>
-        <div className="col-span-4">
+        <div className="lg:col-span-4">
           <HeatmapChart data={heatmap} />
         </div>
       </div>
@@ -362,9 +366,11 @@ export default function Dashboard() {
         <HabitForm
           initial={editing}
           submitting={submitting}
+          error={formError}
           onCancel={() => {
             setFormOpen(false);
             setEditing(null);
+            setFormError("");
           }}
           onSubmit={saveHabit}
         />

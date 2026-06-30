@@ -48,10 +48,10 @@ export default function Login() {
           <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-brand-500 to-brand-700 text-white flex items-center justify-center shadow-lg shadow-brand-500/30">
             <Sparkles size={18} />
           </div>
-          <span className="font-semibold text-lg">AI Habit Tracker</span>
+          <span className="font-semibold text-lg">ProHabit</span>
         </Link>
 
-        <div className="card p-7">
+        <div className="card p-6 sm:p-7">
           <h1 className="text-2xl font-semibold">Welcome back</h1>
           <p className="text-sm text-muted mt-1">
             Log in to continue your streaks.

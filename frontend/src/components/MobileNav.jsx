@@ -23,7 +23,7 @@ export default function MobileNav() {
           <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-brand-500 to-brand-700 text-white flex items-center justify-center shadow-md shadow-brand-500/30">
             <Sparkles size={16} />
           </div>
-          <div className="font-semibold">AI Habit Tracker</div>
+          <div className="font-semibold truncate">ProHabit</div>
         </div>
         <div className="flex items-center gap-2">
           <button

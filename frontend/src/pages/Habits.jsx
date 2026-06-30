@@ -31,6 +31,7 @@ export default function Habits() {
   const [formOpen, setFormOpen] = useState(false);
   const [editing, setEditing] = useState(null);
   const [submitting, setSubmitting] = useState(false);
+  const [formError, setFormError] = useState("");
   const [suggestOpen, setSuggestOpen] = useState(false);
   const [deleteTarget, setDeleteTarget] = useState(null);
 
@@ -80,6 +81,7 @@ export default function Habits() {
 
   const save = async (data) => {
     setSubmitting(true);
+    setFormError("");
     try {
       if (editing) {
         const res = await api.put(`/habits/${editing._id}`, data);
@@ -91,6 +93,8 @@ export default function Habits() {
       }
       setFormOpen(false);
       setEditing(null);
+    } catch (error) {
+      setFormError(error.response?.data?.message || "Failed to save habit.");
     } finally {
       setSubmitting(false);
     }
@@ -133,7 +137,7 @@ export default function Habits() {
             Manage every habit you've ever created.
           </p>
         </div>
-        <div className="flex items-center gap-2">
+        <div className="flex flex-wrap items-center gap-2">
           <button
             className="btn-secondary"
             onClick={() => setSuggestOpen(true)}
@@ -155,7 +159,7 @@ export default function Habits() {
       </div>
 
       <div className="card p-4">
-        <div className="flex flex-col md:flex-row gap-3 md:items-center">
+        <div className="flex flex-col lg:flex-row gap-3 lg:items-center">
           <div className="relative flex-1">
             <Search
               size={16}
@@ -169,7 +173,7 @@ export default function Habits() {
             />
           </div>
           <select
-            className="input md:w-52"
+            className="input lg:w-52"
             value={category}
             onChange={(e) => setCategory(e.target.value)}
           >
@@ -178,7 +182,7 @@ export default function Habits() {
               <option key={c}>{c}</option>
             ))}
           </select>
-          <div className="inline-flex rounded-xl glass overflow-hidden text-sm">
+          <div className="grid grid-cols-2 rounded-xl glass overflow-hidden text-sm lg:inline-flex lg:grid-cols-none">
             <button
               onClick={() => setShowArchived(false)}
               className={`px-3.5 py-2.5 font-medium transition ${
@@ -238,7 +242,7 @@ export default function Habits() {
             return (
               <div
                 key={h._id}
-                className={`card p-4 flex items-center gap-4 ${
+                className={`card p-4 flex flex-col sm:flex-row sm:items-center gap-4 ${
                   h.isArchived ? "opacity-70" : ""
                 }`}
               >
@@ -290,7 +294,7 @@ export default function Habits() {
                   </div>
                 </div>
 
-                <div className="flex items-center gap-1">
+                <div className="flex items-center justify-end gap-1 self-end sm:self-auto">
                   <button
                     className="btn-ghost p-2"
                     onClick={() => {
@@ -337,9 +341,11 @@ export default function Habits() {
         <HabitForm
           initial={editing}
           submitting={submitting}
+          error={formError}
           onCancel={() => {
             setFormOpen(false);
             setEditing(null);
+            setFormError("");
           }}
           onSubmit={save}
         />

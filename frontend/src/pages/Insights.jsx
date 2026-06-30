@@ -252,7 +252,7 @@ export default function Insights() {
         </div>
         <button
           onClick={generateReport}
-          className="btn-secondary"
+          className="btn-secondary w-full sm:w-auto"
           disabled={reportLoading}
         >
           <RefreshCw
@@ -309,7 +309,7 @@ export default function Insights() {
       </div>
 
       {/* Summary cards */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+      <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-3">
         <div className="card p-4">
           <div className="flex items-center gap-2 text-xs font-medium text-muted">
             <Activity size={14} /> Completions
@@ -367,7 +367,7 @@ export default function Insights() {
       </div>
 
       {/* Charts row 1 */}
-      <div className="grid lg:grid-cols-2 gap-5">
+      <div className="grid gap-5 lg:grid-cols-2">
         <div className="card p-5">
           <div className="text-sm font-medium mb-3">Completions by day</div>
           <div style={{ width: "100%", height: 240 }}>
@@ -441,7 +441,7 @@ export default function Insights() {
       </div>
 
       {/* Charts row 2 */}
-      <div className="grid lg:grid-cols-[1fr_1.4fr] gap-5">
+      <div className="grid gap-5 lg:grid-cols-[1fr_1.4fr]">
         <div className="card p-5">
           <div className="text-sm font-medium mb-3">By category</div>
           {!categoryData.length ? (

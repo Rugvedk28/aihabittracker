@@ -7,7 +7,7 @@ export default function AppLayout() {
     <div className="min-h-screen">
       <Sidebar />
       <MobileNav />
-      <main className="md:ml-64 px-4 md:px-8 py-6 md:py-8 pb-24 md:pb-10 max-w-6xl mx-auto">
+      <main className="md:ml-64 px-4 sm:px-5 lg:px-8 py-5 sm:py-6 md:py-8 pb-24 md:pb-10 max-w-6xl mx-auto w-full">
         <Outlet />
       </main>
     </div>

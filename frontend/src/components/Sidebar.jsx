@@ -54,7 +54,7 @@ export default function Sidebar() {
           <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-brand-500 to-brand-700 text-white flex items-center justify-center shadow-lg shadow-brand-500/30">
             <Sparkles size={18} />
           </div>
-          <div className="font-semibold text-lg tracking-tight">AI Habit Tracker</div>
+          <div className="font-semibold text-lg tracking-tight">ProHabit</div>
         </div>
       </div>
 

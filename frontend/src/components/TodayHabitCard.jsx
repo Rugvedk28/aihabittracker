@@ -40,7 +40,7 @@ export default function TodayHabitCard({
 
   return (
     <div
-      className={`card p-4 flex items-center gap-4 transition ${completed
+      className={`card p-4 flex flex-col sm:flex-row sm:items-center gap-4 transition ${completed
         ? "ring-1 ring-brand-500/10 bg-brand-500/5 dark:bg-brand-500/3"
         : ""
         }`}
@@ -52,8 +52,8 @@ export default function TodayHabitCard({
         {habit.icon}
       </div>
 
-      <div className="flex-1 min-w-0">
-        <div className="flex items-center gap-2">
+      <div className="flex-1 min-w-0 w-full">
+        <div className="flex items-center gap-2 flex-wrap">
           <div className="font-medium truncate">{habit.name}</div>
           <span className="chip">{habit.category}</span>
         </div>
@@ -72,7 +72,7 @@ export default function TodayHabitCard({
         <span className="font-medium">{streak}</span>
       </div>
 
-      <div className="relative">
+      <div className="relative self-end sm:self-auto">
         <button
           ref={triggerRef}
           className="btn-ghost p-2"
@@ -133,7 +133,7 @@ export default function TodayHabitCard({
 
       <button
         onClick={onToggle}
-        className={`shrink-0 w-11 h-11 rounded-full flex items-center justify-center transition ${completed
+        className={`shrink-0 w-11 h-11 rounded-full flex items-center justify-center transition self-end sm:self-auto ${completed
           ? "bg-gradient-to-br from-brand-500 to-brand-700 text-white shadow-lg shadow-brand-500/40 animate-pop"
           : "bg-brand-100 border-2 border-border-brand-400 text-brand-400 hover:border-brand-400 hover:text-brand-400"
           }`}

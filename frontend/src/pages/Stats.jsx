@@ -120,7 +120,7 @@ export default function Stats() {
         </div>
       ) : (
         <>
-          <div className="grid md:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {best && (
               <div className="card p-5">
                 <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-emerald-600 dark:text-emerald-400">
@@ -181,12 +181,12 @@ export default function Stats() {
             )}
           </div>
 
-          <div className="grid lg:grid-cols-2 gap-5">
+          <div className="grid gap-5 lg:grid-cols-2">
             <WeeklyBarChart data={weekly} title="Completions — last 7 days" />
             <MonthlyBarChart data={monthly} />
           </div>
 
-          <div className="grid lg:grid-cols-[1fr_1fr] gap-5">
+          <div className="grid gap-5 lg:grid-cols-[1fr_1fr]">
             <CategoryPieChart data={categoryData} />
             <div className="card p-5">
               <div className="text-sm font-medium mb-3">

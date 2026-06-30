@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { CATEGORIES, COLORS, ICONS } from "../utils/constants.js";
 
-export default function HabitForm({ initial, onSubmit, onCancel, submitting }) {
+export default function HabitForm({ initial, onSubmit, onCancel, submitting, error }) {
   const [form, setForm] = useState({
     name: initial?.name || "",
     description: initial?.description || "",
@@ -40,6 +40,12 @@ export default function HabitForm({ initial, onSubmit, onCancel, submitting }) {
           required
         />
       </div>
+
+      {error && (
+        <div className="text-sm text-rose-500 bg-rose-500/10 border border-rose-500/20 rounded-lg px-3 py-2">
+          {error}
+        </div>
+      )}
 
       <div>
         <label className="label">Description</label>
