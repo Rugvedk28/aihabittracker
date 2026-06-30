@@ -28,13 +28,17 @@ export const register= async (req, res) => {
         });
         if(user){
             const token = signToken(user._id);
-            res.status(201).json({
+            const userData = {
                 _id: user._id,
                 name: user.name,
                 email: user.email,
                 avatar: user.avatar,
                 morningMotivation: user.morningMotivation,
-                token
+            };
+            res.status(201).json({
+                user: userData,
+                token,
+                ...userData,
             });
         }else{
             res.status(400).json({ message: "Invalid user data" });
@@ -55,13 +59,17 @@ export const login = async (req, res) => {
         const user = await User.findOne({ email: email.toLowerCase() });
         if(user && (await user.matchPassword(password))){
             const token = signToken(user._id);
-            res.json({
+            const userData = {
                 _id: user._id,
                 name: user.name,
                 email: user.email,
                 avatar: user.avatar,
                 morningMotivation: user.morningMotivation,
-                token
+            };
+            res.json({
+                user: userData,
+                token,
+                ...userData,
             });
         }else{
             res.status(401).json({ message: "Invalid email or password" });
@@ -90,13 +98,17 @@ export const updateProfile = async (req, res) => {
                 user.password = req.body.password;
             }
             const updatedUser = await user.save();
-            res.json({
+            const userData = {
                 _id: updatedUser._id,
                 name: updatedUser.name,
                 email: updatedUser.email,
                 avatar: updatedUser.avatar,
                 morningMotivation: updatedUser.morningMotivation,
-                token: signToken(updatedUser._id)
+            };
+            res.json({
+                user: userData,
+                token: signToken(updatedUser._id),
+                ...userData,
             });
         }else{
             res.status(404).json({ message: "User not found" });
